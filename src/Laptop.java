@@ -1,5 +1,11 @@
 public class Laptop extends Computer {
-    public Laptop(int id, String brand, String cpuFamily, double price) {
-        super(id, brand, cpuFamily, price);
+    private int memorySize;
+    private int ssdCapacity;
+    private double screenSize;
+    public Laptop(String catagory, String type, String id, String brand, String cpuFamily, double price, int memorySize, int ssdCapacity, double screenSize) {
+        super(catagory, type, id, brand, cpuFamily, price);
+        this.memorySize = memorySize;
+        this.ssdCapacity = ssdCapacity;
+        this.screenSize = screenSize;
     }
 }
