@@ -6,4 +6,20 @@ public class Desktop extends Computer {
         this.memorySize = memorySize;
         this.ssdCapacity = ssdCapacity;
     }
+
+    public int getMemorySize() {
+        return memorySize;
+    }
+
+    public int getSsdCapacity() {
+        return ssdCapacity;
+    }
+
+    public void setMemorySize(int memorySize) {
+        this.memorySize = memorySize;
+    }
+
+    public void setSsdCapacity(int ssdCapacity) {
+        this.ssdCapacity = ssdCapacity;
+    }
 }

@@ -6,13 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public abstract class ComputerStoreSystem {
-    private static HashMap<Computer, Computer> computerHashMap = new HashMap();
+    private static HashMap<String, Computer> computerHashMap = new HashMap<>();
     private static List<Staff> staffList;
 
-    public ComputerStoreSystem() {
-    }
-
-    public static void intialiseComputerHashMap(HashMap<Computer, Computer> computerHashMap) {
+    public static void intialiseComputerHashMap() {
         String line = null;
         String[] parts;
         try {
@@ -22,7 +19,7 @@ public abstract class ComputerStoreSystem {
                     ComputerBuilder computerBuilder = new ComputerBuilder();
                     Computer temp = computerBuilder.buildComputer(parts);
                     if(temp==null){break;}
-
+                    computerHashMap.put(temp.getId(),temp);
 
                 }
                 br.close();
