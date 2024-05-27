@@ -19,8 +19,8 @@ public class ComputerBuilder {
                 double lt_price = Double.parseDouble(parts[8]);
                 return new Laptop(catagory, type, id, brands, cpuFamily, lt_memorySize, lt_ssdCapacity, lt_screenSize, lt_price);
             case "Tablet":
-                double tab_screenSize = Double.parseDouble(parts[6]);
-                double tab_price = Double.parseDouble(parts[7]);
+                double tab_screenSize = Double.parseDouble(parts[5]);
+                double tab_price = Double.parseDouble(parts[6]);
                 return new Tablet(catagory, type, id, brands, cpuFamily, tab_screenSize, tab_price);
         }
     return null;
