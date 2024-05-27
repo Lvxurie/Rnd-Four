@@ -6,10 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public abstract class ComputerStoreSystem {
-    private static HashMap<String, Computer> computerHashMap = new HashMap<>();
-    private static List<Staff> staffList;
-
-    public static void intialiseComputerHashMap() {
+    public static void intialiseComputerHashMap(HashMap<String, Computer> computerHashMap) {
         String line = null;
         String[] parts;
         try {
