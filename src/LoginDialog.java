@@ -13,32 +13,66 @@ public class LoginDialog extends JDialog{
 
     public LoginDialog(JFrame origin){
         super(origin, "Log in..",true);
-        setLayout(null);
-        ImageIcon iconImage = new ImageIcon("logo_125_125.png");
-        iconLabel = new JLabel(iconImage);
-        nameLabel = new JLabel("Username:", SwingConstants.LEFT);
-        passLabel = new JLabel("Password:", SwingConstants.LEFT);
-        nameTextField = new JTextField(20);
-        passTextField = new JPasswordField(20);
-        submit = new JButton("Log in");
-
-        add(iconLabel);
-        add(nameLabel);
-        add(nameTextField);
-        add(passLabel);
-        add(passTextField);
-        add(submit);
-
-        iconLabel.setBounds(0,10,iconImage.getIconWidth(),iconImage.getIconHeight());
-        nameLabel.setBounds(130,50, 70,20);
-        passLabel.setBounds(130,80, 70,20);
-        nameTextField.setBounds(210, 50, 60, 20);
-        passTextField.setBounds(210, 80, 60, 20);
-        submit.setBounds(230, 110, 40, 20);
-
         setSize(300,200);
         setLocationRelativeTo(origin);
         setVisible(true);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
+        setLayout(new GridBagLayout());
+        JPanel leftPanel = new JPanel(new BorderLayout());
+        JPanel rightPanel = new JPanel(new GridBagLayout());
+
+
+        ImageIcon iconImage = new ImageIcon("logo_125_125.png");
+        iconLabel = new JLabel(iconImage);
+        nameLabel = new JLabel("Username:");
+        passLabel = new JLabel("Password:");
+        nameTextField = new JTextField(20);
+        passTextField = new JPasswordField(20);
+        submit = new JButton("Log in");
+        submit.setFocusPainted(true);
+
+        leftPanel.add(iconLabel);
+
+        GridBagConstraints usernameLabelConstraints = new GridBagConstraints();
+        usernameLabelConstraints.gridx = 0;
+        usernameLabelConstraints.gridy =1;
+        usernameLabelConstraints.insets = new Insets(5,5,5,5);
+        //usernameLabelConstraints.anchor = GridBagConstraints.CENTER;
+        rightPanel.add(nameLabel, usernameLabelConstraints);
+
+        GridBagConstraints usernameTextFieldConstraints = new GridBagConstraints();
+        usernameLabelConstraints.gridx = 0;
+        usernameLabelConstraints.gridy =2;
+        usernameLabelConstraints.insets = new Insets(5,5,5,5);
+        //usernameLabelConstraints.anchor = GridBagConstraints.CENTER;
+        rightPanel.add(nameTextField, usernameTextFieldConstraints);
+
+        GridBagConstraints passwordLabelConstraints = new GridBagConstraints();
+        usernameLabelConstraints.gridx = 0;
+        usernameLabelConstraints.gridy =4;
+        usernameLabelConstraints.insets = new Insets(5,5,5,5);
+        //usernameLabelConstraints.anchor = GridBagConstraints.CENTER;
+        rightPanel.add(passLabel, passwordLabelConstraints);
+
+        GridBagConstraints passwordTextFieldConstraints = new GridBagConstraints();
+        usernameLabelConstraints.gridx = 0;
+        usernameLabelConstraints.gridy =2;
+        usernameLabelConstraints.insets = new Insets(5,5,5,5);
+        //usernameLabelConstraints.anchor = GridBagConstraints.CENTER;
+        rightPanel.add(passTextField, passwordTextFieldConstraints);
+
+        GridBagConstraints submitButtonConstraints = new GridBagConstraints();
+        usernameLabelConstraints.gridx = 0;
+        usernameLabelConstraints.gridy = 6;
+        usernameLabelConstraints.insets = new Insets(5,5,5,5);
+        //usernameLabelConstraints.anchor = GridBagConstraints.CENTER;
+        rightPanel.add(submit, submitButtonConstraints);
+
+        GridBagConstraints mainPane = new GridBagConstraints();
+        mainPane.gridx = 0;
+        mainPane.gridy =0;
+        mainPane.fill = GridBagConstraints.BOTH;
+
     }
 }
