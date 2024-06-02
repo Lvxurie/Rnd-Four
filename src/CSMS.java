@@ -7,25 +7,51 @@ import java.util.List;
 public class CSMS extends JFrame {
     private static HashMap<String, Computer> computerHashMap;
     private static List<Staff> staffList;
-    private static JFrame mainFrame;
     private static int screenWidth;
     private static int screenHeight;
+    private static ImageIcon iconImage;
+    private static JLabel iconLabel;
+    private static JPanel preLoginPanel;
+    private static JButton preLoginButton;
+    private static boolean initiateLogin;
+
     public CSMS(){
         computerHashMap = new HashMap<>();
         staffList = new ArrayList<>();
-        mainFrame = new JFrame("Computer Store Management System");
+        iconImage = new ImageIcon("logo_125_125.png");
+        iconLabel = new JLabel(iconImage);
+        preLoginPanel = new JPanel();
+        preLoginButton = new JButton("Click to login");
         screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+        initiateLogin = false;
+
+        //Setting up main window
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(screenWidth/2, screenHeight);
+        getContentPane().setBackground(Color.GRAY);
+
+        setVisible(true);
     }
     public static void main(String[] args) {
-        new CSMS();
+        CSMS mainWindow = new CSMS();
+        loginPanel(mainWindow);
+        while(initiateLogin){
+            JDialog loginDialog = new JDialog(mainWindow, true);
+        }
         ComputerStoreSystem.intialiseComputerHashMap(computerHashMap);
-        setMainFrame();
-        LoginDialog loginScreen = new LoginDialog(mainFrame);
+        ComputerStoreSystem.initialiseStaffLogins(staffList);
     }
-    public static void setMainFrame(){
-        mainFrame.setBounds(screenWidth/2 - (screenWidth/4), screenHeight/100, screenWidth/2 ,screenHeight-50);
-        mainFrame.setVisible(true);
-        mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    public static void setIsLoggedIn(boolean l){
+        initiateLogin = l;
+    }
+    public static void loginPanel(CSMS main){
+        preLoginButton.setFocusPainted(false);
+        preLoginButton.addActionListener(e-> setIsLoggedIn(true));
+
+        preLoginPanel.add(iconLabel);
+        preLoginPanel.add(preLoginButton);
+
+        main.add(preLoginPanel, BorderLayout.NORTH);
     }
 }

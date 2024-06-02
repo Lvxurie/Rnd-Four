@@ -26,4 +26,11 @@ public abstract class ComputerStoreSystem {
         }
 
     }
+    public static void initialiseStaffLogins(List<Staff> staffCredentialsList){
+        staffCredentialsList.add(new Staff("p1", "p1", false));
+        staffCredentialsList.add(new Staff("p2", "p2", false));
+        staffCredentialsList.add(new Staff("p3", "p3", false));
+        staffCredentialsList.add(new Staff("m1", "m1", true));
+        staffCredentialsList.add(new Staff("m2", "m2", true));
+    }
 }
