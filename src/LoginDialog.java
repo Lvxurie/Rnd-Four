@@ -69,7 +69,8 @@ public class LoginDialog extends JDialog{
             //dispose of the log in box if a match is found
             if(success){
                 JOptionPane.showMessageDialog(this, "Logging in..", "Success!", JOptionPane.PLAIN_MESSAGE);
-                CSMS.setIsLoggedIn(true);
+                MainWindow.setLoginButtonText(true);
+                MainWindow.Open(origin);
                 dispose();
             }
             //otherwise show an error and clear the password field.
