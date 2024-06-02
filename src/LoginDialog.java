@@ -70,8 +70,8 @@ public class LoginDialog extends JDialog{
             if(success){
                 JOptionPane.showMessageDialog(this, "Logging in..", "Success!", JOptionPane.PLAIN_MESSAGE);
                 MainWindow.setLoginButtonText(true);
-                MainWindow.Open(origin);
                 dispose();
+                MainWindow.Open(origin);
             }
             //otherwise show an error and clear the password field.
             else {
