@@ -47,18 +47,28 @@ public class MainWindow extends JFrame {
         JComboBox<String> catagories = new JComboBox<String>(ComputerStoreSystem.catagories);
         JLabel typeLabel = new JLabel("Computer Type");
         JComboBox<String> types = new JComboBox<String>(ComputerStoreSystem.types);
+
         JPanel comboBoxPanel = new JPanel();
         comboBoxPanel.add(catagoryLabel);
         comboBoxPanel.add(catagories);
         comboBoxPanel.add(typeLabel);
         comboBoxPanel.add(types);
-        JTable table = new JTable(9,10);
+
+        StockTableModel stockTableModel = new StockTableModel(computerHashMap.values());
+        JTable table = new JTable(stockTableModel);
+        JScrollPane tableScrollPane = new JScrollPane(table);
+        table.setFillsViewportHeight(true);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.setColumnSelectionAllowed(false);
+        table.setRowSelectionAllowed(true);
+
         browse.add(comboBoxPanel,BorderLayout.NORTH);
-        browse.add(table);
+        browse.add(tableScrollPane);
 
         JPanel view = new JPanel();
         JPanel details = new JPanel(new GridLayout(9,2));
         details.setBorder(BorderFactory.createEmptyBorder(120,0,0,0));
+
         JTextField modelIDField = new JTextField();
         JComboBox<String> catagoryCombo = new JComboBox<>(ComputerStoreSystem.catagories);
         JComboBox<String> typeCombo = new JComboBox<>(ComputerStoreSystem.types);
@@ -89,6 +99,8 @@ public class MainWindow extends JFrame {
         details.add(priceField);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
+
+        //need to update(Collection<Computer> data) stockTableModel on changes
         JButton add = new JButton("add");
         add.addActionListener(e->{
             //create a new object of type ? and add it to the hashmap

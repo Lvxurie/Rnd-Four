@@ -38,6 +38,10 @@ public class Computer {
         this.catagory = catagory;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public void setType(String type) {
         this.type = type;
     }
