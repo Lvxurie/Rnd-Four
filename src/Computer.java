@@ -4,9 +4,9 @@ public class Computer {
     protected String id;
     protected String brand;
     protected String cpuFamily;
-    protected double price;
+    protected String price;
 
-    public Computer(String category, String type, String id, String brand, String cpuFamily, double price){
+    public Computer(String category, String type, String id, String brand, String cpuFamily, String price){
         this.category = category;
         this.type = type;
         this.id = id;
@@ -38,7 +38,7 @@ public class Computer {
         this.category = category;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
@@ -58,7 +58,7 @@ public class Computer {
         this.cpuFamily = cpuFamily;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 }

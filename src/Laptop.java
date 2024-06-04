@@ -1,36 +1,36 @@
 public class Laptop extends Computer {
-    private int memorySize;
-    private int ssdCapacity;
-    private double screenSize;
+    private String memorySize;
+    private String ssdCapacity;
+    private String screenSize;
 
-    public Laptop(String catagory, String type, String id, String brand, String cpuFamily, int memorySize, int ssdCapacity, double screenSize, double price) {
+    public Laptop(String catagory, String type, String id, String brand, String cpuFamily, String memorySize, String ssdCapacity, String screenSize, String price) {
         super(catagory, type, id, brand, cpuFamily, price);
         this.memorySize = memorySize;
         this.ssdCapacity = ssdCapacity;
         this.screenSize = screenSize;
     }
 
-    public int getMemorySize() {
+    public String getMemorySize() {
         return memorySize;
     }
 
-    public int getSsdCapacity() {
+    public String getSsdCapacity() {
         return ssdCapacity;
     }
 
-    public double getScreenSize() {
+    public String getScreenSize() {
         return screenSize;
     }
 
-    public void setMemorySize(int memorySize) {
+    public void setMemorySize(String memorySize) {
         this.memorySize = memorySize;
     }
 
-    public void setSsdCapacity(int ssdCapacity) {
+    public void setSsdCapacity(String ssdCapacity) {
         this.ssdCapacity = ssdCapacity;
     }
 
-    public void setScreenSize(double screenSize) {
+    public void setScreenSize(String screenSize) {
         this.screenSize = screenSize;
     }
 }

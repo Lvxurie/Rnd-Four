@@ -43,9 +43,11 @@ public class MainWindow extends JFrame {
     }
 
     public static void Open(JFrame origin) {
+        //create a tabbed pane for the main window
         JTabbedPane tabbedPane = new JTabbedPane();
-
+        //create the browse pane
         JPanel browse = new JPanel();
+        //create a model to handle the table data from the hashmap and a scroll panel
         StockTableModel stockTableModel = new StockTableModel(computerHashMap.values());
         JTable table = new JTable(stockTableModel);
         JScrollPane tableScrollPane = new JScrollPane(table);
@@ -53,7 +55,6 @@ public class MainWindow extends JFrame {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setColumnSelectionAllowed(false);
         table.setRowSelectionAllowed(true);
-        //when a row is selected send data to the view tab
 
         JLabel catagoryLabel = new JLabel("Computer Category");
         JComboBox<String> categoryComboBox = new JComboBox<String>(ComputerStoreSystem.categories);
@@ -67,16 +68,18 @@ public class MainWindow extends JFrame {
             String selectedType = (String) typeComboBox.getSelectedItem();
             stockTableModel.updateType(selectedType);
         });
+        //create a panel for the buttons
         JPanel comboBoxPanel = new JPanel();
         comboBoxPanel.add(catagoryLabel);
         comboBoxPanel.add(categoryComboBox);
         comboBoxPanel.add(typeLabel);
         comboBoxPanel.add(typeComboBox);
 
-
+        //add the panels to the browse window
         browse.add(comboBoxPanel, BorderLayout.NORTH);
         browse.add(tableScrollPane);
 
+        //create the view pane
         JPanel view = new JPanel();
         JPanel details = new JPanel(new GridLayout(9, 2));
         details.setBorder(BorderFactory.createEmptyBorder(120, 0, 0, 0));
@@ -114,7 +117,70 @@ public class MainWindow extends JFrame {
 
         JButton add = new JButton("add");
         add.addActionListener(e -> {
-            HashMap<String, Computer> temp = computerHashMap;
+            if(!stockTableModel.checkDuplicateID(modelIDField.getText())){
+                String category = "";
+                String type;
+                String id;
+                String brand;
+                String cpuFamily;
+                String memorySize;
+                String ssdCapacity;
+                String screenSize;
+                double price;
+
+                if(categoryCombo.getSelectedItem()!= null){
+                    category = categoryCombo.getSelectedItem().toString();
+                }
+                if(typeCombo.getSelectedItem()!= null){
+                    type = typeCombo.getSelectedItem().toString();
+                }
+                if(modelIDField.getText()!= null){
+                    id = modelIDField.getText();
+                }
+                if(brandField.getText()!= null){
+                    brand = brandField.getText();
+                }
+                if(cpuFamilyField.getText()!= null){
+                    cpuFamily = cpuFamilyField.getText();
+                }
+                if(priceField.getText()!= null){
+                    price = Double.parseDouble(priceField.getText());
+                }
+                switch(category){
+                    case "Desktop PC": {
+                        if(memorySizeField.getText()!= null){
+                            memorySize = memorySizeField.getText();
+                        }
+                        if(ssdCapacityField.getText()!= null){
+                            ssdCapacity = ssdCapacityField.getText();
+                        }
+                        //Computer temp = new Computer();
+                    }
+                    case "Laptop":{
+                        if(memorySizeField.getText()!= null){
+                            memorySize = memorySizeField.getText();
+                        }
+                        if(ssdCapacityField.getText()!= null){
+                            ssdCapacity = ssdCapacityField.getText();
+                        }
+                        if(memorySizeField.getText()!= null){
+                            memorySize = memorySizeField.getText();
+                        }
+                        if(screenSizeField.getText()!= null){
+                            screenSize = screenSizeField.getText();
+                        }
+                    }
+                    case "Tablet":{
+                        if(screenSizeField.getText()!= null){
+                            screenSize = screenSizeField.getText();
+                        }
+                    }
+
+                }
+
+                //computerHashMap.put(modelIDField.getText(), temp);
+                stockTableModel.updateMasterList(computerHashMap.values());
+            }
 
         });
         JButton update = new JButton("update");
@@ -148,26 +214,24 @@ public class MainWindow extends JFrame {
                 typeCombo.setSelectedItem(selectedComputer.getType());
                 brandField.setText(selectedComputer.getBrand());
                 cpuFamilyField.setText(selectedComputer.getCpuFamily());
-                String price = Double.toString(selectedComputer.getPrice());
-                priceField.setText(price);
+                priceField.setText(selectedComputer.getPrice());
 
                 if (selectedComputer instanceof Desktop) {
-                    String memorySize = Integer.toString(((Desktop) selectedComputer).getMemorySize());
+                    String memorySize = ((Desktop) selectedComputer).getMemorySize();
                     memorySizeField.setText(memorySize);
-                    String ssdCapacity = Integer.toString(((Desktop) selectedComputer).getSsdCapacity());
+                    String ssdCapacity = ((Desktop) selectedComputer).getSsdCapacity();
                     ssdCapacityField.setText(ssdCapacity);
                 } else if (selectedComputer instanceof Laptop) {
-                    String memorySize = Integer.toString(((Laptop) selectedComputer).getMemorySize());
+                    String memorySize = ((Laptop) selectedComputer).getMemorySize();
                     memorySizeField.setText(memorySize);
-                    String ssdCapacity = Integer.toString(((Laptop) selectedComputer).getSsdCapacity());
+                    String ssdCapacity = ((Laptop) selectedComputer).getSsdCapacity();
                     ssdCapacityField.setText(ssdCapacity);
-                    String screenSize = Double.toString(((Laptop) selectedComputer).getScreenSize());
+                    String screenSize = ((Laptop) selectedComputer).getScreenSize();
                     screenSizeField.setText(screenSize);
                 } else if (selectedComputer instanceof Tablet) {
-                    String screenSize = Double.toString(((Tablet) selectedComputer).getScreenSize());
+                    String screenSize = ((Tablet) selectedComputer).getScreenSize();
                     screenSizeField.setText(screenSize);
                 }
-                view.
             } catch (IndexOutOfBoundsException err) {
                 System.out.println(err);
             }

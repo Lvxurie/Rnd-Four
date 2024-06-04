@@ -1,6 +1,7 @@
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public class StockTableModel extends AbstractTableModel {
     private Collection<Computer> computers;
@@ -65,7 +66,16 @@ public void updateCategory(String currentCategory){
 public Computer activeSelection(int index){
         Computer[] activeList = computers.toArray(computers.toArray(new Computer[0]));
         return activeList[index];
-
 }
-
+public boolean checkDuplicateID(String id){
+        for(Computer c: computers){
+            if(c.getId().equals(id)){
+                return true;
+            }
+        }
+        return false;
+}
+public void updateMasterList(Collection<Computer> newList){
+        allComputers = newList;
+}
 }
