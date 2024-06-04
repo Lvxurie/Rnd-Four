@@ -1,15 +1,28 @@
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class StockTableModel extends AbstractTableModel {
     private Collection<Computer> computers;
+    private Collection<Computer> allComputers;
+    private String currentType;
+    private String currentCategory;
     private final String[] columnNames = {"ID", "Category", "Type", "Brand", "CPU Family", "Price"};
     public StockTableModel(Collection<Computer> data){
-        computers = data;
+        allComputers = data;
+        computers = new ArrayList<>(allComputers);
+        currentCategory = "---Show All---";
+        currentType = "---Show All---";
     }
     //update data
-    public void updateData(Collection<Computer> data){
-        computers = data;
+    public void updateData(){
+        ArrayList<Computer> updatedData = new ArrayList<>();
+        for(Computer c : allComputers){
+            if((c.getType().equals(currentType) || currentType.equals("---Show All---")) && (c.getCategory().equals(currentCategory) || currentCategory.equals("---Show All---"))){
+                updatedData.add(c);
+            }
+        }
+        computers = updatedData;
         fireTableDataChanged();
     }
     @Override
@@ -33,7 +46,7 @@ public class StockTableModel extends AbstractTableModel {
         Computer temp = computer[rowIndex];
         switch (columnIndex){
             case 0: return temp.getId();
-            case 1: return temp.getCatagory();
+            case 1: return temp.getCategory();
             case 2: return temp.getType();
             case 3: return temp.getBrand();
             case 4: return temp.getCpuFamily();
@@ -41,5 +54,18 @@ public class StockTableModel extends AbstractTableModel {
             default: return null;
         }
     }
+public void updateType(String currentType){
+        this.currentType = currentType;
+        updateData();
+}
+public void updateCategory(String currentCategory){
+        this.currentCategory = currentCategory;
+        updateData();
+}
+public Computer activeSelection(int index){
+        Computer[] activeList = computers.toArray(computers.toArray(new Computer[0]));
+        return activeList[index];
+
+}
 
 }

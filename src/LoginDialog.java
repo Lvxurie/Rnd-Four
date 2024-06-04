@@ -58,18 +58,21 @@ public class LoginDialog extends JDialog{
         submit.addActionListener(e -> {
          String username = nameTextField.getText();
          char[] password = passTextField.getPassword();
+         Staff staffLoggedIn = new Staff("","");
          boolean success = false;
             for(Staff s : staffCredentialsList){
                 if(s.validateCredentials(username, password)){
                     //break from loop if a match is found
                     success = true;
+                    staffLoggedIn = s;
                     break;
                 }
             }
             //dispose of the log in box if a match is found
-            if(success){
+            if(success && !staffLoggedIn.getUsername().equals("")){
                 JOptionPane.showMessageDialog(this, "Logging in..", "Success!", JOptionPane.PLAIN_MESSAGE);
-                MainWindow.setLoginButtonText(true);
+                MainWindow.loginInit(true);
+                MainWindow.setStaffMember(staffLoggedIn);
                 dispose();
                 MainWindow.Open(origin);
             }
